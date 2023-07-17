@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
 
 public abstract class SingletonMonobehaviour<T> : MonoBehaviour where T : MonoBehaviour {
-    private static T instance;
+    private static T _instance;
 
     public static T Instance {
-        get { return instance; }
+        get { return _instance; }
     }
 
-    protected void Awake() {
-        Debug.Log("In awake");
-        if (instance == null) {
-            instance = this as T;
+    protected virtual void Awake() {
+        if (_instance == null) {
+            _instance = this as T;
         } else {
             Destroy(gameObject);
         }
